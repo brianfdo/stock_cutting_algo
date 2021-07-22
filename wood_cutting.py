@@ -12,7 +12,7 @@ sheet_size = 250
 # max number of sheets
 max_sheets = len(cut_list)
 
-def cut(cut_list, sheet_size, max_sheets):
+def wood_cutting(cut_list, sheet_size, max_sheets):
     sheets = 0
     rem_sheets = [0] * max_sheets
     # rem_length = sheet_size
@@ -43,4 +43,4 @@ def cut(cut_list, sheet_size, max_sheets):
 
     return(sheets, cuts_per_sheet, 'waste per sheet:', rem_sheets[:sheets])
 
-print(cut(cut_list, 250, len(cut_list)))
+print(wood_cutting(cut_list, 250, len(cut_list)))
