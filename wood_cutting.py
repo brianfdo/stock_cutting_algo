@@ -4,9 +4,9 @@ cut_list = []
 for key, value in cut_dict.items():
     for i in range(value):
         cut_list.append(int(key))
-cut_list.sort(reverse=True)
+# cut_list.sort(reverse=True)
 
-# hard coded sheet size
+# temp hard coded sheet size
 sheet_size = 250
 
 # max number of sheets
@@ -23,16 +23,16 @@ def cut(cut_list, sheet_size, max_sheets):
     for i in range(max_sheets):
         j = 0
 
-        min = sheet_size + 1
+        # algo to find best sheet to assign the cut
+        min_waste = sheet_size + 1
         best_index = 0
-        # loop to find best sheet to assign the cut
         for j in range(sheets):
-            if (rem_sheets[j] >= cut_list[i] and rem_sheets[j] - cut_list[i] < min):
+            if (rem_sheets[j] >= cut_list[i] and rem_sheets[j] - cut_list[i] < min_waste):
                 best_index = j
-                min = rem_sheets[j] - cut_list[i]
+                min_waste = rem_sheets[j] - cut_list[i]
              
-        # if no sheet could accommodate the cut, then we create a new bin
-        if (min == sheet_size + 1):
+        # if no sheet can accommodate the cut, then we create new sheet
+        if (min_waste == sheet_size + 1):
             rem_sheets[sheets] = sheet_size - cut_list[i]
             cuts_per_sheet.append([cut_list[i]])
             sheets += 1
@@ -41,14 +41,6 @@ def cut(cut_list, sheet_size, max_sheets):
             rem_sheets[best_index] -= cut_list[i]
             cuts_per_sheet[best_index].append(cut_list[i])
 
-        # if rem_length >= cut_list[i]:
-        #     rem_length = rem_length - cut_list[i]
-        #     temp.append(cut_list[i])
-        # else:
-        #     sheets += 1
-        #     cuts_per_sheet.append(temp)
-        #     rem_length = sheet_size - cut_list[i]
-        #     temp = [cut_list[i]]
     return(sheets, cuts_per_sheet, 'waste per sheet:', rem_sheets[:sheets])
 
 print(cut(cut_list, 250, len(cut_list)))
