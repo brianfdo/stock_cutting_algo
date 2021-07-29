@@ -1,3 +1,5 @@
+from cutting_algo import generate_cut_list, wood_cutting
+
 class Cuts(object):
     def __init__(self):
         #Numbers given from company
@@ -24,23 +26,28 @@ class Cuts(object):
         return dict.__contains__(self,x)
 
 
-# c = Cuts()
-# #Examples that show CutsDic works
-# #Gets amount wanted for 125" 
-# print(c.cuts['125'])
-# print(c.cuts)
-# #Changes the amount for 125"
-# c.cuts.__setitem__('125',9)
-# print(c.cuts)
-# #Adds on a new length with an amount wanted
-# c.cuts.__setitem__('135',30)
-# print(c.cuts)
-# #Gets amount wanted for 108"
-# print(c.cuts.__getitem__('108'))
-# #Deletes the length that was just added
-# c.cuts.__delitem__('135')
-# print(c.cuts)
-# #Sets 125" back to the oringinal amount
-# c.cuts.__setitem__('125',10)
-# print(c.cuts)
-# print('')
+c = Cuts()
+#Examples that show CutsDic works
+#Gets amount wanted for 125" 
+print(c.cuts['125'])
+print(c.cuts)
+#Changes the amount for 125"
+c.cuts.__setitem__('125',9)
+print(c.cuts)
+#Adds on a new length with an amount wanted
+c.cuts.__setitem__('135',30)
+print(c.cuts)
+#Gets amount wanted for 108"
+print(c.cuts.__getitem__('108'))
+#Deletes the length that was just added
+c.cuts.__delitem__('135')
+print(c.cuts)
+#Sets 125" back to the oringinal amount
+c.cuts.__setitem__('125',10)
+print(c.cuts)
+print('')
+cut_list = generate_cut_list(c.cuts)
+output = wood_cutting(cut_list, 250, len(cut_list))
+print('Number of sheets needed: ' + str(output[0]))
+print('Specific cuts per sheet: ' + str(output[1]))
+print('Waste per sheet: ' + str(output[2]))

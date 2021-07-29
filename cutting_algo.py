@@ -1,11 +1,15 @@
 cut_dict = {'125': 10, '120': 40, '108': 26, '99': 5, '60': 10, '49': 10, '43': 24, '34': 12, '30': 5, '12': 26}
 
-cut_list = []
-for key, value in cut_dict.items():
-    for i in range(value):
-        cut_list.append(int(key))
-# cut_list.sort(reverse=True)
-
+def generate_cut_list(cut_dict):
+    cut_list = []
+    for key, value in cut_dict.items():
+        for i in range(value):
+            cut_list.append(int(key))
+    # cut_list.sort(reverse=True)
+    return cut_list
+cut_list = generate_cut_list(cut_dict)
+sum = sum(cut_list) / 250
+print(sum)
 # temp hard coded sheet size
 sheet_size = 250
 
@@ -15,12 +19,10 @@ max_sheets = len(cut_list)
 def wood_cutting(cut_list, sheet_size, max_sheets):
     sheets = 0
     rem_sheets = [0] * max_sheets
-    # rem_length = sheet_size
     cuts_per_sheet = []
-    temp = []
 
     # loops through all cuts
-    for i in range(max_sheets):
+    for i in range(len(cut_list)):
         j = 0
 
         # algo to find best sheet to assign the cut
@@ -40,7 +42,7 @@ def wood_cutting(cut_list, sheet_size, max_sheets):
         else: 
             rem_sheets[best_index] -= cut_list[i]
             cuts_per_sheet[best_index].append(cut_list[i])
-
-    return(sheets, cuts_per_sheet, 'waste per sheet:', rem_sheets[:sheets])
+    
+    return(sheets, cuts_per_sheet, rem_sheets[:sheets])
 
 print(wood_cutting(cut_list, 250, len(cut_list)))
