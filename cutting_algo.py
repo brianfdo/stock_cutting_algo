@@ -8,8 +8,10 @@ def generate_cut_list(cut_dict):
     # cut_list.sort(reverse=True)
     return cut_list
 cut_list = generate_cut_list(cut_dict)
+
 sum = sum(cut_list) / 250
 print(sum)
+
 # temp hard coded sheet size
 sheet_size = 250
 
