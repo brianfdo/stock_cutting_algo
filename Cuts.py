@@ -1,4 +1,4 @@
-from cutting_algo import generate_cut_list, wood_cutting
+from cutting_algo import generate_cut_list, result, wood_cutting
 
 class Cuts(object):
     def __init__(self):
@@ -47,7 +47,5 @@ c.cuts.__setitem__('125',10)
 print(c.cuts)
 print('')
 cut_list = generate_cut_list(c.cuts)
-output = wood_cutting(cut_list, 250, len(cut_list))
-print('Number of sheets needed: ' + str(output[0]))
-print('Specific cuts per sheet: ' + str(output[1]))
-print('Waste per sheet: ' + str(output[2]))
+output = wood_cutting(cut_list, [250, 200], len(cut_list))
+result(output[0], output[1], output[2], output[3])

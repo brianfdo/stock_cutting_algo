@@ -9,7 +9,7 @@ def generate_cut_list(cut_dict):
     return cut_list
 cut_list = generate_cut_list(cut_dict)
 
-sum = sum(cut_list) / 300
+sum = sum(cut_list) / 250
 print(sum)
 
 # temp hard coded sheet size
@@ -73,7 +73,6 @@ def result(num_of_sheets, list_of_cuts, list_of_sheet_sizes, waste_per_sheet):
     print('Optimal number of sheets required: ' + str(num_of_sheets))
     list_of_cuts = [tuple(x) for x in list_of_cuts]
     unique_cuts = list(set(list_of_cuts))
-    unique_sizes = list(set(list_of_sheet_sizes))
     for i in range(len(unique_cuts)):
         if list_of_cuts.count(unique_cuts[i]) == 1:
             print('For ' + str(list_of_cuts.count(unique_cuts[i])) + ' sheet of size ' +   str(list_of_sheet_sizes[list_of_cuts.index(unique_cuts[i])]) +  ', make the following cuts: ' + str(unique_cuts[i]))
