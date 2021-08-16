@@ -9,17 +9,19 @@ def generate_cut_list(cut_dict):
     return cut_list
 cut_list = generate_cut_list(cut_dict)
 
-sum = sum(cut_list) / 250
+sum = sum(cut_list) / 300
 print(sum)
 
 # temp hard coded sheet size
-sheet_size = 250
+sheet_sizes = [300,100]
 
 # max number of sheets
 max_sheets = len(cut_list)
 
-def wood_cutting(cut_list, sheet_size, max_sheets):
+def wood_cutting(cut_list, sheet_sizes, max_sheets):
+    sheet_sizes.sort(reverse=True)
     sheets = 0
+    sheet_type = [0] * max_sheets
     rem_sheets = [0] * max_sheets
     cuts_per_sheet = []
 
@@ -28,7 +30,7 @@ def wood_cutting(cut_list, sheet_size, max_sheets):
         j = 0
 
         # algo to find best sheet to assign the cut
-        min_waste = sheet_size + 1
+        min_waste = sheet_sizes[0] + 1
         best_index = 0
         for j in range(sheets):
             if (rem_sheets[j] >= cut_list[i] and rem_sheets[j] - cut_list[i] < min_waste):
@@ -36,15 +38,34 @@ def wood_cutting(cut_list, sheet_size, max_sheets):
                 min_waste = rem_sheets[j] - cut_list[i]
              
         # if no sheet can accommodate the cut, then we create new sheet
-        if (min_waste == sheet_size + 1):
-            rem_sheets[sheets] = sheet_size - cut_list[i]
+        if (min_waste == sheet_sizes[0] + 1):
+            rem_sheets[sheets] = sheet_sizes[0] - cut_list[i]
             cuts_per_sheet.append([cut_list[i]])
             sheets += 1
         # assign the cut to best sheet
         else: 
             rem_sheets[best_index] -= cut_list[i]
             cuts_per_sheet[best_index].append(cut_list[i])
-    
-    return(sheets, cuts_per_sheet, rem_sheets[:sheets])
 
-print(wood_cutting(cut_list, 250, len(cut_list)))
+    sheet_sizes.sort()
+    for i in range(len(cuts_per_sheet)):
+        sizeFit = False
+        j = 0
+        total = 0
+        for element in range(len(cuts_per_sheet[i])):
+            total = total + cuts_per_sheet[i][element]
+        while sizeFit is False:
+            if total <= sheet_sizes[j]:
+                sheet_type[i] = sheet_sizes[j]
+                rem_sheets[i] = sheet_sizes[j] - total
+                sizeFit = True
+            else:
+                j += 1
+
+
+
+
+    
+    return(sheets, cuts_per_sheet, sheet_type[:sheets], rem_sheets[:sheets])
+
+print(wood_cutting(cut_list, [300,100], len(cut_list)))
