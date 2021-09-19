@@ -13,13 +13,14 @@ sum = sum(cut_list) / 250
 print(sum)
 
 # temp hard coded sheet size
-sheet_sizes = [300,100]
+sheet_sizes = [200,100,150,300]
 
 # max number of sheets
 max_sheets = len(cut_list)
 
 def wood_cutting(cut_list, sheet_sizes, max_sheets):
     sheet_sizes.sort(reverse=True)
+    print(sheet_sizes)
     sheets = 0
     sheet_type = [0] * max_sheets
     rem_sheets = [0] * max_sheets
@@ -47,6 +48,7 @@ def wood_cutting(cut_list, sheet_sizes, max_sheets):
             rem_sheets[best_index] -= cut_list[i]
             cuts_per_sheet[best_index].append(cut_list[i])
 
+    print(cuts_per_sheet)
     sheet_sizes.sort()
     for i in range(len(cuts_per_sheet)):
         sizeFit = False
@@ -64,7 +66,7 @@ def wood_cutting(cut_list, sheet_sizes, max_sheets):
 
 
 
-
+    print(sheet_type[:sheets])
     
     return(sheets, cuts_per_sheet, sheet_type[:sheets], rem_sheets[:sheets])
 
@@ -79,5 +81,6 @@ def result(num_of_sheets, list_of_cuts, list_of_sheet_sizes, waste_per_sheet):
         else:
             print('For ' + str(list_of_cuts.count(unique_cuts[i])) + ' sheets of size ' +   str(list_of_sheet_sizes[list_of_cuts.index(unique_cuts[i])]) +  ', make the following cuts: ' + str(unique_cuts[i]))
 
-output = wood_cutting(cut_list, [250], len(cut_list))
+output = wood_cutting(cut_list, sheet_sizes, len(cut_list))
 result(output[0], output[1], output[2], output[3])
+print(str(cut_list))

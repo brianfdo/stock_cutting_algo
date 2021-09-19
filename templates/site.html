@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wood Cutting Algorithm</title>
+</head>
+
+<body>
+
+<div class="split left">
+  <div class="centered">
+    <h2>Sheet Sizes</h2><t></t>
+    <button type="button" id="sheet-button" onclick="addsheet()">+</button><br><br>
+    <input type="text" class="sheet">
+    <p id="sheetid"></p>
+  </div>
+</div>
+
+<div class="split right">
+  <div class="centered">
+    <h2>Desired Cut Sizes and Quantity</h2>
+    <button type="button" id="cut-button" onclick="addcut()">+</button><br><br>
+    <input type="text" class="cutsize">
+    <input type="text" class="quantity">
+    <p id="cutid"></p>
+  </div>
+</div>
+
+<div class="submit">
+  <button type="button" id="submit-button" onclick="submit()">Submit</button>
+</div>
+
+<div id="results">
+<p id="results-here">
+</p>
+</div>
+
+</body>
+
+</html>
